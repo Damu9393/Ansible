@@ -1,0 +1,25 @@
+Ansible Modules
+Ansible modules are units of code that can control system resources or execute system commands. Ansible provides a module library that you can execute directly on remote hosts or through playbooks. You can also write custom modules.
+
+Ping Module
+ansible -i inventory all -m ping
+Stat Module
+ansible -i inventory all -m stat -a "path=/var/www/html"
+User Module
+ansible -i inventory all -m user -a "name=naresh" -b
+Setup Module
+ansible -i inventory all -m setup
+File Module
+ansible -i inventory all -m file -a "name=demo state=touch"
+Copy Module
+ansible -i inventory all -m copy -a "src=file1 dest="
+Yum or Apt Module (Very Important)
+Basic states:
+
+name=httpd (install)
+state=latest
+state=present
+state=absent
+Example:
+
+ansible all -m yum -a "name=httpd state=latest"
