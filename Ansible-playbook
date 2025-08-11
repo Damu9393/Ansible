@@ -1,0 +1,58 @@
+---
+- name: Install and start Apache on web servers
+  hosts: web
+  become: yes
+  tasks:
+    - name: Install httpd package
+      yum:
+        name: httpd
+        state: present
+
+    - name: Start httpd service
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+
+Ad-hoc Command to Install Apache (httpd)
+
+🔍 Explanation:
+-i inventory: Specifies the inventory file containing the list of hosts.
+all: Applies the command to all hosts in the inventory.
+-m yum: Uses the yum module to manage packages (for RHEL/CentOS systems).
+-a "name=httpd state=latest": Installs the httpd package and ensures it's the latest version.
+-b: Runs the command with elevated privileges (sudo).
+📘 Equivalent Playbook
+---
+- name: first playbook
+  hosts: all
+  become: yes
+  tasks:
+    - name: install httpd software
+      yum:
+        name: httpd
+        state: latest
+
+
+🔍 Explanation:
+- name: first playbook: A label for the playbook.
+hosts: all: Targets all hosts defined in the inventory.
+become: yes: Uses sudo to run tasks as root.
+tasks:: A list of actions to perform.
+- name: install httpd software: Describes the task.
+yum:: Uses the Yum module.
+name: httpd: Specifies the package to install.
+state: latest: Ensures the latest version is installed.
+✅ Ad-hoc Command to Start Apache Service
+
+🔍 Explanation:
+-m service: Uses the service module to manage services.
+-a "name=httpd state=started": Starts the httpd service.
+-b: Runs with sudo privileges.
+📝 Additional Note:
+"We can define number of tasks into" — This likely refers to the ability to include multiple tasks in a playbook to perform a sequence of operations like install, start, enable, configure, etc.
+
+
+how to run ansible plybook by using command
+vi playbook.yml
+ansible-playbook playbook.yml 
